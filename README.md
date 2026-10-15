@@ -31,7 +31,7 @@ https://github.com/raquelcedazo/sistemas-informaticos-industriales/wiki
 
 Asignatura impartida por el **Departamento de Ingeniería Eléctrica, Electrónica, Automática y Física Aplicada** de la **Universidad Politécnica de Madrid**:
 
-- **Raquel Cedazo** *(coordinadora de las prácticas)*
+- **Raquel Cedazo**
 - **David Álvarez**
 - **Imanol Izcara**
 
