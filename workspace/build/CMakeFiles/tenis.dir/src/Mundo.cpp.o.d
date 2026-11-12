@@ -172,6 +172,7 @@ CMakeFiles/tenis.dir/src/Mundo.cpp.o: \
  /home/dani/sii-55795/workspace/include/Esfera.h \
  /home/dani/sii-55795/workspace/include/Vector2D.h \
  /home/dani/sii-55795/workspace/include/Raqueta.h \
+ /home/dani/sii-55795/workspace/include/DatosMemCompartida.h \
  /home/dani/sii-55795/workspace/include/glut.h /usr/include/GL/gl.h \
  /usr/include/GL/glext.h /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/15/include/stdint.h /usr/include/stdint.h \
@@ -216,4 +217,10 @@ CMakeFiles/tenis.dir/src/Mundo.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h
+ /usr/include/linux/close_range.h \
+ /usr/include/x86_64-linux-gnu/sys/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-map-flags-generic.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/mman-shared.h \
+ /usr/include/x86_64-linux-gnu/bits/mman_ext.h

@@ -1,4 +1,5 @@
 /home/dani/sii-55795/workspace/build/CMakeFiles/tenis.dir
 /home/dani/sii-55795/workspace/build/CMakeFiles/logger.dir
+/home/dani/sii-55795/workspace/build/CMakeFiles/bot.dir
 /home/dani/sii-55795/workspace/build/CMakeFiles/edit_cache.dir
 /home/dani/sii-55795/workspace/build/CMakeFiles/rebuild_cache.dir
