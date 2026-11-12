@@ -9,6 +9,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/mman.h>
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -21,7 +24,8 @@ CMundo::CMundo()
 
 CMundo::~CMundo()
 {
-
+        close(fd_fifo);
+        munmap(pdatos, sizeof(DatosMemCompartida));
 }
 
 void CMundo::InitGL()
@@ -115,6 +119,16 @@ void CMundo::OnDraw()
 
 void CMundo::OnTimer(int value)
 {	
+        pdatos->esfera = esfera;
+        pdatos->raqueta1 = jugador1;
+        
+        if (pdatos->accion == 1)
+          OnKeyboardDown('w', 0, 0);
+        else if (pdatos->accion == -1)
+          OnKeyboardDown('s', 0, 0);
+        else
+          jugador1.velocidad.y = 0;
+        
 	jugador1.Mueve(0.025f);
 	jugador2.Mueve(0.025f);
 	esfera.Mueve(0.025f);
@@ -135,6 +149,9 @@ void CMundo::OnTimer(int value)
 		esfera.velocidad.x=2+2*rand()/(float)RAND_MAX;
 		esfera.velocidad.y=2+2*rand()/(float)RAND_MAX;
 		puntos2++;
+		char cad[100];
+                sprintf(cad, "Jugador 2 marca 1 punto, lleva un total de %d puntos.", puntos2);
+                write(fd_fifo, cad, strlen(cad) + 1);
 	}
 
 	if(fondo_dcho.Rebota(esfera))
@@ -144,7 +161,12 @@ void CMundo::OnTimer(int value)
 		esfera.velocidad.x=-2-2*rand()/(float)RAND_MAX;
 		esfera.velocidad.y=-2-2*rand()/(float)RAND_MAX;
 		puntos1++;
+		char cad[100];
+                sprintf(cad, "Jugador 1 marca 1 punto, lleva un total de %d puntos.", puntos1);
+                write(fd_fifo, cad, strlen(cad) + 1);
 	}
+	
+	
 
 }
 
@@ -192,4 +214,16 @@ void CMundo::Init()
 	jugador2.g=0;
 	jugador2.x1=6;jugador2.y1=-1;
 	jugador2.x2=6;jugador2.y2=1;
+	
+	/*Abrir el FIFO */
+	fd_fifo = open("FIFO_LOGGER", O_WRONLY);
+	if(fd_fifo == -1)
+	  perror("No puede abrirse el FIFO");
+	  
+	  int fd_mem = open("DatosBot", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	  ftruncate(fd_mem, sizeof(DatosMemCompartida));
+	  void* proyeccion = mmap(NULL, sizeof(DatosMemCompartida), PROT_READ | PROT_WRITE, MAP_SHARED, fd_mem, 0);
+	  close(fd_mem);
+	  pdatos = (DatosMemCompartida*)proyeccion;
+	  pdatos->accion = 0;
 }
